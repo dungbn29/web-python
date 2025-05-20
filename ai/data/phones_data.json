@@ -1,0 +1,646 @@
+[
+    {
+        "name": "iPhone 14 Pro",
+        "brand": "Apple",
+        "price": 25000000,
+        "price_range": "high",
+        "stock": 15,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["128GB", "256GB", "512GB", "1TB"]
+        },
+        "description": "Flagship iPhone với camera 48MP, chip A16 Bionic, màn hình Super Retina XDR 6.1 inch",
+        "image": "iphone14pro.jpg",
+        "specifications": {
+            "ram": "6GB",
+            "processor": "Apple A16 Bionic",
+            "os": "iOS 16",
+            "battery": "3200 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Samsung Galaxy S23",
+        "brand": "Samsung",
+        "price": 22000000,
+        "price_range": "high",
+        "stock": 20,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["128GB", "256GB", "512GB"]
+        },
+        "description": "Điện thoại Android cao cấp với camera 50MP, chip Snapdragon 8 Gen 2, màn hình Dynamic AMOLED 2X",
+        "image": "galaxys23.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Snapdragon 8 Gen 2",
+            "os": "Android 13",
+            "battery": "3900 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Xiaomi Redmi Note 12",
+        "brand": "Xiaomi",
+        "price": 5000000,
+        "price_range": "mid",
+        "stock": 30,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "good",
+            "storage": ["64GB", "128GB"]
+        },
+        "description": "Điện thoại tầm trung với camera 48MP, pin 5000mAh, màn hình AMOLED 6.67 inch",
+        "image": "redminote12.jpg",
+        "specifications": {
+            "ram": "6GB",
+            "processor": "Snapdragon 685",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Google Pixel 7",
+        "brand": "Google",
+        "price": 16000000,
+        "price_range": "high",
+        "stock": 10,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại với camera tốt nhất, Google Tensor G2 chip, màn hình OLED 6.3 inch",
+        "image": "pixel7.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Google Tensor G2",
+            "os": "Android 13",
+            "battery": "4355 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "OPPO Reno8 T",
+        "brand": "OPPO",
+        "price": 8000000,
+        "price_range": "mid",
+        "stock": 25,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "good",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại tầm trung với camera AI 108MP, pin 5000mAh, sạc nhanh 67W",
+        "image": "reno8t.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Snapdragon 695",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "iPhone 15 Pro Max",
+        "brand": "Apple",
+        "price": 35000000,
+        "price_range": "premium",
+        "stock": 12,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB", "1TB"]
+        },
+        "description": "iPhone cao cấp nhất với chip A17 Pro, camera 48MP nâng cấp, màn hình 6.7 inch và khung titanium",
+        "image": "iphone15promax.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Apple A17 Pro",
+            "os": "iOS 17",
+            "battery": "4422 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Samsung Galaxy Z Fold 5",
+        "brand": "Samsung",
+        "price": 40000000,
+        "price_range": "premium",
+        "stock": 8,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB", "1TB"]
+        },
+        "description": "Điện thoại màn hình gập cao cấp với màn hình 7.6 inch khi mở, chip Snapdragon 8 Gen 2",
+        "image": "galaxyzfold5.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "Snapdragon 8 Gen 2",
+            "os": "Android 13",
+            "battery": "4400 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Xiaomi 13T Pro",
+        "brand": "Xiaomi",
+        "price": 15000000,
+        "price_range": "high",
+        "stock": 15,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB"]
+        },
+        "description": "Điện thoại cao cấp với camera Leica 50MP, chip MediaTek Dimensity 9200, sạc siêu nhanh 120W",
+        "image": "xiaomi13tpro.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "MediaTek Dimensity 9200+",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "OnePlus 11",
+        "brand": "OnePlus",
+        "price": 17000000,
+        "price_range": "high",
+        "stock": 18,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Flagship với camera Hasselblad, chip Snapdragon 8 Gen 2, sạc nhanh 100W và màn hình AMOLED 120Hz",
+        "image": "oneplus11.jpg",
+        "specifications": {
+            "ram": "16GB",
+            "processor": "Snapdragon 8 Gen 2",
+            "os": "OxygenOS 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Vivo X90 Pro",
+        "brand": "Vivo",
+        "price": 20000000,
+        "price_range": "high",
+        "stock": 10,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB"]
+        },
+        "description": "Điện thoại cao cấp với camera ZEISS 50MP, chip MediaTek Dimensity 9200, sạc siêu nhanh 120W",
+        "image": "vivox90pro.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "MediaTek Dimensity 9200",
+            "os": "Android 13",
+            "battery": "4870 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Samsung Galaxy A54",
+        "brand": "Samsung",
+        "price": 10000000,
+        "price_range": "mid",
+        "stock": 30,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại tầm trung cao cấp với camera 50MP, màn hình Super AMOLED 120Hz 6.4 inch",
+        "image": "galaxya54.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Exynos 1380",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Realme GT Neo 5",
+        "brand": "Realme",
+        "price": 12000000,
+        "price_range": "mid",
+        "stock": 20,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB"]
+        },
+        "description": "Điện thoại gaming tầm trung với Snapdragon 8+ Gen 1, sạc siêu nhanh 240W, màn hình 144Hz",
+        "image": "realmegtneo5.jpg",
+        "specifications": {
+            "ram": "16GB",
+            "processor": "Snapdragon 8+ Gen 1",
+            "os": "Android 13",
+            "battery": "4600 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Nothing Phone 2",
+        "brand": "Nothing",
+        "price": 15000000,
+        "price_range": "high",
+        "stock": 15,
+        "features": {
+            "camera": "good",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại với thiết kế độc đáo Glyph Interface, Snapdragon 8+ Gen 1, UI tối giản",
+        "image": "nothingphone2.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "Snapdragon 8+ Gen 1",
+            "os": "Nothing OS 2.0",
+            "battery": "4700 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Google Pixel 7a",
+        "brand": "Google",
+        "price": 11000000,
+        "price_range": "mid",
+        "stock": 25,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "good",
+            "display": "good",
+            "storage": ["128GB"]
+        },
+        "description": "Điện thoại tầm trung với camera Pixel xuất sắc, chip Google Tensor G2, Android thuần",
+        "image": "pixel7a.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Google Tensor G2",
+            "os": "Android 13",
+            "battery": "4385 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "iPhone 14",
+        "brand": "Apple",
+        "price": 19000000,
+        "price_range": "high",
+        "stock": 20,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "good",
+            "storage": ["128GB", "256GB", "512GB"]
+        },
+        "description": "iPhone với chip A15 Bionic, camera kép 12MP, màn hình Super Retina XDR 6.1 inch",
+        "image": "iphone14.jpg",
+        "specifications": {
+            "ram": "6GB",
+            "processor": "Apple A15 Bionic",
+            "os": "iOS 16",
+            "battery": "3279 mAh"
+        },
+        "created_at": {"$date": "2023-10-15T00:00:00Z"}
+    },
+    {
+        "name": "Huawei Mate 60 Pro",
+        "brand": "Huawei",
+        "price": 23000000,
+        "price_range": "high",
+        "stock": 12,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB", "1TB"]
+        },
+        "description": "Flagship Huawei với camera XMAGE 50MP, chip Kirin 9000S, màn hình LTPO OLED 6.82 inch",
+        "image": "mate60pro.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "Kirin 9000S",
+            "os": "HarmonyOS 4.0",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-01-10T00:00:00Z"}
+    },
+    {
+        "name": "ASUS ROG Phone 8",
+        "brand": "ASUS",
+        "price": 22000000,
+        "price_range": "high",
+        "stock": 8,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB"]
+        },
+        "description": "Điện thoại gaming với Snapdragon 8 Gen 3, tản nhiệt kim loại, màn hình AMOLED 165Hz 6.78 inch",
+        "image": "rogphone8.jpg",
+        "specifications": {
+            "ram": "16GB",
+            "processor": "Snapdragon 8 Gen 3",
+            "os": "Android 14",
+            "battery": "6000 mAh"
+        },
+        "created_at": {"$date": "2024-02-05T00:00:00Z"}
+    },
+    {
+        "name": "Nokia XR30",
+        "brand": "Nokia",
+        "price": 9000000,
+        "price_range": "mid",
+        "stock": 18,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "good",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại bền bỉ với tiêu chuẩn MIL-STD-810H, camera 64MP, pin 5000mAh",
+        "image": "nokiaxr30.jpg",
+        "specifications": {
+            "ram": "6GB",
+            "processor": "Snapdragon 695",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-03-15T00:00:00Z"}
+    },
+    {
+        "name": "Sony Xperia 1 VI",
+        "brand": "Sony",
+        "price": 26000000,
+        "price_range": "premium",
+        "stock": 6,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB"]
+        },
+        "description": "Điện thoại cao cấp với camera Zeiss, màn hình 4K HDR OLED 6.5 inch, thiết kế không viền",
+        "image": "xperia1vi.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "Snapdragon 8 Gen 3",
+            "os": "Android 14",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-04-01T00:00:00Z"}
+    },
+    {
+        "name": "Motorola Edge 40 Neo",
+        "brand": "Motorola",
+        "price": 8500000,
+        "price_range": "mid",
+        "stock": 22,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Màn hình pOLED 144Hz, camera 50MP OIS, thiết kế mỏng nhẹ 7.6mm",
+        "image": "edge40neo.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Dimensity 7030",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-03-20T00:00:00Z"}
+    },
+    {
+        "name": "Honor Magic 6 Pro",
+        "brand": "Honor",
+        "price": 18000000,
+        "price_range": "high",
+        "stock": 14,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB"]
+        },
+        "description": "Chip Snapdragon 8 Gen 3, camera 180MP, màn hình OLED 120Hz 6.8 inch",
+        "image": "magic6pro.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "Snapdragon 8 Gen 3",
+            "os": "MagicOS 8.0",
+            "battery": "5600 mAh"
+        },
+        "created_at": {"$date": "2024-02-28T00:00:00Z"}
+    },
+    {
+        "name": "TECNO Camon 20 Premier",
+        "brand": "TECNO",
+        "price": 6000000,
+        "price_range": "mid",
+        "stock": 30,
+        "features": {
+            "camera": "excellent",
+            "battery": "good",
+            "performance": "good",
+            "display": "good",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Camera 108MP với cảm biến RGBW, chip Helio G99, thiết kế da cao cấp",
+        "image": "camon20premier.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Helio G99",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-04-05T00:00:00Z"}
+    },
+    {
+        "name": "Infinix Zero 30 5G",
+        "brand": "Infinix",
+        "price": 7000000,
+        "price_range": "mid",
+        "stock": 25,
+        "features": {
+            "camera": "good",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Màn hình AMOLED 144Hz, camera selfie 4K, sạc nhanh 68W",
+        "image": "zero30.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Dimensity 8020",
+            "os": "Android 13",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-03-10T00:00:00Z"}
+    },
+    {
+        "name": "Fairphone 5",
+        "brand": "Fairphone",
+        "price": 9500000,
+        "price_range": "mid",
+        "stock": 15,
+        "features": {
+            "camera": "good",
+            "battery": "good",
+            "performance": "good",
+            "display": "good",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại modular thân thiện môi trường, chip Snapdragon 782G, pin tháo rời",
+        "image": "fairphone5.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Snapdragon 782G",
+            "os": "Android 13",
+            "battery": "4200 mAh"
+        },
+        "created_at": {"$date": "2024-01-30T00:00:00Z"}
+    },
+    {
+        "name": "Samsung Galaxy S24 Ultra",
+        "brand": "Samsung",
+        "price": 28000000,
+        "price_range": "premium",
+        "stock": 10,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB", "1TB"]
+        },
+        "description": "Flagship Samsung với camera 200MP, chip Snapdragon 8 Gen 3, màn hình Dynamic AMOLED 2X 6.8 inch",
+        "image": "galaxys24ultra.jpg",
+        "specifications": {
+            "ram": "12GB",
+            "processor": "Snapdragon 8 Gen 3",
+            "os": "Android 14",
+            "battery": "5000 mAh"
+        },
+        "created_at": {"$date": "2024-01-15T00:00:00Z"}
+    },
+    {
+        "name": "iPhone SE (2024)",
+        "brand": "Apple",
+        "price": 12000000,
+        "price_range": "mid",
+        "stock": 25,
+        "features": {
+            "camera": "good",
+            "battery": "good",
+            "performance": "excellent",
+            "display": "good",
+            "storage": ["64GB", "128GB", "256GB"]
+        },
+        "description": "iPhone giá rẻ với chip A16 Bionic, camera 12MP, màn hình Retina HD 4.7 inch",
+        "image": "iphonese2024.jpg",
+        "specifications": {
+            "ram": "4GB",
+            "processor": "Apple A16 Bionic",
+            "os": "iOS 17",
+            "battery": "2018 mAh"
+        },
+        "created_at": {"$date": "2024-03-10T00:00:00Z"}
+    },
+    {
+        "name": "Xiaomi Redmi Note 13 Pro",
+        "brand": "Xiaomi",
+        "price": 7000000,
+        "price_range": "mid",
+        "stock": 35,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "good",
+            "display": "excellent",
+            "storage": ["128GB", "256GB"]
+        },
+        "description": "Điện thoại tầm trung với camera 200MP, chip Snapdragon 7s Gen 2, màn hình AMOLED 120Hz",
+        "image": "redminote13pro.jpg",
+        "specifications": {
+            "ram": "8GB",
+            "processor": "Snapdragon 7s Gen 2",
+            "os": "Android 13",
+            "battery": "5100 mAh"
+        },
+        "created_at": {"$date": "2024-02-20T00:00:00Z"}
+    },
+    {
+        "name": "OnePlus 12",
+        "brand": "OnePlus",
+        "price": 20000000,
+        "price_range": "high",
+        "stock": 15,
+        "features": {
+            "camera": "excellent",
+            "battery": "excellent",
+            "performance": "excellent",
+            "display": "excellent",
+            "storage": ["256GB", "512GB"]
+        },
+        "description": "Flagship với camera Hasselblad, chip Snapdragon 8 Gen 3, sạc nhanh 100W và màn hình LTPO AMOLED 120Hz",
+        "image": "oneplus12.jpg",
+        "specifications": {
+            "ram": "16GB",
+            "processor": "Snapdragon 8 Gen 3",
+            "os": "OxygenOS 14",
+            "battery": "5400 mAh"
+        },
+        "created_at": {"$date": "2024-01-25T00:00:00Z"}
+    }
+] 

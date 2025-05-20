@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="/static/css/auth.css">
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Phone Shop</a>
+    <nav>
+      <a href="/recommend">Chọn điện thoại thông minh</a>
+      <a href="/cart">Giỏ hàng</a>
+      {% if session.get('user') %}
+        <span>Xin chào {{ session['user'] }}</span>
+        <a href="/logout">Đăng xuất</a>
+        <a href="/cart">Giỏ hàng</a>
+      {% else %}
+        <a href="/login">Đăng nhập</a>
+        <a href="/register">Đăng ký</a>
+      {% endif %}
+    </nav>
+  </header>
+    <main>
+        <h2>Đăng nhập</h2>
+        <form method="POST">
+            <label>Email:</label><input name="email" required><br>
+            <label>Mật khẩu:</label><input type="password" name="password" required><br>
+            <button type="submit">Đăng nhập</button>
+        </form>
+        <a href="/register">Chưa có tài khoản? Đăng ký</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/* CSS cho trang recommend */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f6f8fa;
+    margin: 0;
+    color: #222;
+}
+main {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 32px 24px;
+}
+h2 {
+    color: #222;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+textarea {
+    width: 100%;
+    min-height: 80px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    resize: vertical;
+}
+button {
+    background: #0066cc;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+button:hover {
+    background: #004a99;
+}
+.recommend-results {
+    margin-top: 24px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.recommend-results ul {
+    padding-left: 18px;
+}
+.recommend-results li {
+    margin-bottom: 8px;
+}
+a {
+    color: #0066cc;
+    text-decoration: none;
+    margin-top: 12px;
+    display: inline-block;
+}
+a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    main {
+        padding: 16px 4px;
+    }
+}

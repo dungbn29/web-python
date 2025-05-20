@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ phone.name }}</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Phone Shop</a>
+    <nav>
+      <a href="/recommend">Chọn điện thoại thông minh</a>
+      <a href="/cart">Giỏ hàng</a>
+      {% if session.get('user') %}
+        <span>Xin chào {{ session['user'] }}</span>
+        <a href="/logout">Đăng xuất</a>
+        <a href="/cart">Giỏ hàng</a>
+      {% else %}
+        <a href="/login">Đăng nhập</a>
+        <a href="/register">Đăng ký</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    <div class="product-detail">
+      <img class="product-image-large" src="/static/images/{{ phone.image if phone.image else 'no-image.jpg' }}" alt="{{ phone.name }}">
+      <div class="product-info">
+        <h1>{{ phone.name }}</h1>
+        <div class="product-price">{{ phone.price }} VND</div>
+        <p class="desc">{{ phone.description }}</p>
+        <p><strong>Thông số kỹ thuật:</strong> {{ phone.specifications }}</p>
+        <p>Tồn kho: {{ phone.stock }}</p>
+        <form method="POST" action="/add_to_cart">
+          <input type="hidden" name="name" value="{{ phone.name }}">
+          <label>Số lượng:</label>
+          <input type="number" name="quantity" value="1" min="1">
+          <button type="submit">Thêm vào giỏ hàng</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

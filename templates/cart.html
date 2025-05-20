@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Giỏ hàng</title>
+  <link rel="stylesheet" href="/static/css/cart.css">
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Phone Shop</a>
+    <nav>
+      <a href="/recommend">Chọn điện thoại thông minh</a>
+      <a href="/cart">Giỏ hàng</a>
+      {% if session.get('user') %}
+        <span>Xin chào {{ session['user'] }}</span>
+        <a href="/logout">Đăng xuất</a>
+        <a href="/cart">Giỏ hàng</a>
+      {% else %}
+        <a href="/login">Đăng nhập</a>
+        <a href="/register">Đăng ký</a>
+      {% endif %}
+    </nav>
+  </header>
+    <h1>Giỏ hàng của bạn</h1>
+    {% if cart %}
+      <div class="cart-list">
+        {% for item in cart %}
+          <div class="cart-item">
+            <img src="/static/images/{{ item.image if item.image else 'no-image.jpg' }}" alt="{{ item.name }}">
+            <div class="cart-info">
+              <div class="cart-title">{{ item.name }}</div>
+              <div>{{ item.price }} VND x {{ item.quantity }}</div>
+              <a class="remove-btn" href="/remove_from_cart/{{ item.name }}">Xoá</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <p class="cart-total"><strong>Tổng tiền: {{ total }} VND</strong></p>
+      <form action="/checkout" method="POST">
+        <button type="submit">Thanh toán</button>
+      </form>
+    {% else %}
+      <p>Giỏ hàng trống</p>
+    {% endif %}
+    <a class="continue-btn" href="/">Tiếp tục mua hàng</a>
+  </main>
+</body>
+</html>

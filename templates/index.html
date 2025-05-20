@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Danh sách điện thoại</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Phone Shop</a>
+    <nav>
+      <a href="/recommend">Chọn điện thoại thông minh</a>
+      <a href="/cart">Giỏ hàng</a>
+      {% if session.get('user') %}
+        <span>Xin chào {{ session['user'] }}</span>
+        <a href="/logout">Đăng xuất</a>
+        <a href="/cart">Giỏ hàng</a>
+      {% else %}
+        <a href="/login">Đăng nhập</a>
+        <a href="/register">Đăng ký</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    <div class="product-grid">
+      {% for phone in phones %}
+        <div class="product-card">
+          <a href="/product/{{ phone.name }}">
+            <img src="/static/images/{{ phone.image if phone.image else 'no-image.jpg' }}" alt="{{ phone.name }}">
+            <h2>{{ phone.name }}</h2>
+          </a>
+          <div class="product-price">{{ phone.price }} VND</div>
+          <a class="view-detail" href="/product/{{ phone.name }}">Xem chi tiết</a>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>

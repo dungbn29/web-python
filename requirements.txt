@@ -1,9 +1,2 @@
 flask
 pymongo
-transformers
-torch
-underthesea
-scikit-learn
-pandas
-joblib
-datasets

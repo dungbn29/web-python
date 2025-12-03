@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, jsonify, flash
 from datetime import datetime
 
 shop_bp = Blueprint("shop", __name__)
@@ -37,9 +37,19 @@ def add_to_cart():
 
 @shop_bp.route("/cart")
 def view_cart():
+    from db import phones_col
     cart = session.get("cart", {})
     total = sum(item["price"] * item["quantity"] for item in cart.values())
-    return render_template("cart.html", cart=cart.values(), total=total)
+    cart_items = []
+    for item in cart.values():
+        phone = phones_col.find_one({"name": item["name"]})
+        cart_items.append({
+            "name": item["name"],
+            "price": item["price"],
+            "quantity": item["quantity"],
+            "image": phone["image"] if phone else "no-image.jpg"
+        })
+    return render_template("cart.html", cart=cart_items, total=total)
 
 @shop_bp.route("/remove_from_cart/<string:name>")
 def remove_from_cart(name):
@@ -49,22 +59,79 @@ def remove_from_cart(name):
         session["cart"] = cart
     return redirect("/cart")
 
-@shop_bp.route("/checkout", methods=["POST"])
-def checkout():
-    from db import phones_col
+@shop_bp.route("/checkout", methods=["GET", "POST"])
+def checkout_page():
+    from db import phones_col, orders_col
+    if request.method == "POST":
+        if "user" not in session:
+            return redirect("/login")
+        cart = session.get("cart", {})
+        if not cart:
+            return redirect("/cart")
+        fullname = request.form.get("fullname")
+        address = request.form.get("address")
+        phone_number = request.form.get("phone")
+        payment_method = request.form.get("payment_method")
+        
+        orders_col.insert_one({
+            "user": session["user"],
+            "fullname": fullname,
+            "address": address,
+            "phone": phone_number,
+            "payment_method": payment_method,
+            "items": list(cart.values()),
+            "total": sum(i["price"] * i["quantity"] for i in cart.values()),
+            "date": datetime.utcnow(),
+            "status": "pending"
+        })
+        for name, item in cart.items():
+            phones_col.update_one({"name": name}, {"$inc": {"stock": -item["quantity"]}})
+        session.pop("cart", None)
+        flash("Đặt hàng thành công!", "success")
+        return redirect("/")
+    # GET request
     if "user" not in session:
         return redirect("/login")
     cart = session.get("cart", {})
     if not cart:
         return redirect("/cart")
-    db = phones_col.database
-    db.orders.insert_one({
-        "user": session["user"],
-        "items": list(cart.values()),
-        "total": sum(i["price"] * i["quantity"] for i in cart.values()),
-        "date": datetime.utcnow()
+    return render_template("checkout.html", success=False)
+
+@shop_bp.route('/update_cart', methods=['POST'])
+def update_cart():
+    from db import phones_col
+    
+    data = request.get_json()
+    name = data['name']
+    action = data['action']
+    
+    cart = session.get('cart', {})
+    if name not in cart:
+        return jsonify({'success': False, 'message': 'Sản phẩm không tồn tại trong giỏ hàng'})
+    
+    # Cập nhật số lượng
+    if action == 'increase':
+        cart[name]['quantity'] += 1
+    elif action == 'decrease':
+        if cart[name]['quantity'] <= 1:
+            return jsonify({'success': False, 'message': 'Số lượng tối thiểu là 1'})
+        cart[name]['quantity'] -= 1
+    
+    # Kiểm tra tồn kho
+    phone = phones_col.find_one({'name': name})
+    if phone and phone.get('stock', 0) < cart[name]['quantity']:
+        return jsonify({'success': False, 'message': 'Số lượng vượt quá tồn kho'})
+    
+    session['cart'] = cart
+    
+    # Tính toán giá mới
+    new_price = cart[name]['price'] * cart[name]['quantity']
+    new_total = sum(item['price'] * item['quantity'] for item in cart.values())
+    
+    return jsonify({
+        'success': True,
+        'newQuantity': cart[name]['quantity'],
+        'newPrice': new_price,
+        'newTotal': new_total
     })
-    for name, item in cart.items():
-        phones_col.update_one({"name": name}, {"$inc": {"stock": -item["quantity"]}})
-    session.pop("cart")
-    return "Đặt hàng thành công!"
+

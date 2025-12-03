@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thanh toán</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="/static/css/cart.css">
+  <link rel="stylesheet" href="/static/css/checkout.css">
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Phone Shop</a>
+    <nav>
+      <a href="/cart">Giỏ hàng</a>
+      {% if session.get('user') %}
+        <span>Xin chào {{ session.get('user_name', 'User') }}</span>
+        <a href="/logout">Đăng xuất</a>
+      {% else %}
+        <a href="/login">Đăng nhập</a>
+        <a href="/register">Đăng ký</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    <h1>Thanh toán</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="/checkout" method="POST" class="checkout-form">
+      <label>Họ và tên:</label>
+      <input type="text" name="fullname" required>
+      <label>Địa chỉ nhận hàng:</label>
+      <input type="text" name="address" required>
+      <label>Số điện thoại:</label>
+      <input type="tel" name="phone" required pattern="[0-9]{10,11}">
+      <label>Phương thức thanh toán:</label>
+      <select name="payment_method" required>
+        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+        <option value="bank">Chuyển khoản ngân hàng</option>
+        <option value="momo">Ví MoMo</option>
+        <option value="vnpay">VNPay</option>
+      </select>
+      <button type="submit">Xác nhận đặt hàng</button>
+    </form>
+  </main>
+</body>
+</html>

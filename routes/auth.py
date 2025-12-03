@@ -11,7 +11,11 @@ def login():
         password = hashlib.sha256(request.form["password"].encode()).hexdigest()
         user = users_col.find_one({"email": email, "password": password})
         if user:
-            session["user"] = user["email"]
+            session["user"] = email
+            session["user_name"] = user.get("name", "User")
+            session["role"] = user.get("role", "user")
+            if user.get("role") == "admin":
+                return redirect("/admin")
             return redirect("/")
         flash("Sai thông tin đăng nhập")
     return render_template("login.html")
@@ -26,9 +30,12 @@ def register():
         if users_col.find_one({"email": email}):
             flash("Email đã tồn tại")
             return redirect("/register")
-        users_col.insert_one({"email": email, "password": password, "name": name})
+        users_col.insert_one({"email": email, "password": password, "name": name, "role": "user"})
+        session["user"] = email
+        session["user_name"] = name
+        session["role"] = "user"
         flash("Đăng ký thành công")
-        return redirect("/login")
+        return redirect("/")
     return render_template("register.html")
 
 @auth_bp.route("/logout")

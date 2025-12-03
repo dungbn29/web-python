@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.env
+venv/
+ENV/
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test
+htmlcov/
+.coverage
+
+# Others
+*.sqlite3
+*.db
+
+# Ignore model checkpoints, large files
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+
+# Ignore data cache
+ai/data/*.cache

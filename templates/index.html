@@ -8,12 +8,10 @@
   <header class="main-header">
     <a href="/" class="logo">Phone Shop</a>
     <nav>
-      <a href="/recommend">Chọn điện thoại thông minh</a>
       <a href="/cart">Giỏ hàng</a>
       {% if session.get('user') %}
-        <span>Xin chào {{ session['user'] }}</span>
+        <span>Xin chào {{ session.get('user_name', 'User') }}</span>
         <a href="/logout">Đăng xuất</a>
-        <a href="/cart">Giỏ hàng</a>
       {% else %}
         <a href="/login">Đăng nhập</a>
         <a href="/register">Đăng ký</a>
@@ -21,6 +19,15 @@
     </nav>
   </header>
   <main>
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+      {% if messages %} 
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     <div class="product-grid">
       {% for phone in phones %}
         <div class="product-card">

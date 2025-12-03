@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Phone Shop - Admin Panel</a>
+    <nav>
+      <a href="/">Cửa hàng</a>
+      <span>Xin chào {{ session.get('user_name', 'Admin') }}</span>
+      <a href="/logout">Đăng xuất</a>
+    </nav>
+  </header>
+  
+  <main class="admin-container">
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+      {% if messages %} 
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="switchTab('products')">Quản Lý Sản Phẩm</button>
+      <button class="tab-button" onclick="switchTab('orders')">Đơn Hàng</button>
+    </div>
+
+    <!-- Products Management Tab -->
+    <div id="products" class="tab-content active">
+      <h2>Danh Sách Sản Phẩm</h2>
+      
+      <div class="add-product-section">
+        <h3>Thêm Sản Phẩm Mới</h3>
+        <form id="addProductForm">
+          <div class="form-group">
+            <label for="newProductName">Tên sản phẩm:</label>
+            <input type="text" id="newProductName" required>
+          </div>
+          <div class="form-group">
+            <label for="newProductBrand">Hãng:</label>
+            <input type="text" id="newProductBrand" required>
+          </div>
+          <div class="form-group">
+            <label for="newProductPrice">Giá (VND):</label>
+            <input type="number" id="newProductPrice" required>
+          </div>
+          <div class="form-group">
+            <label for="newProductStock">Tồn kho:</label>
+            <input type="number" id="newProductStock" required>
+          </div>
+          <div class="form-group">
+            <label for="newProductDesc">Mô tả:</label>
+            <textarea id="newProductDesc" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="newProductImage">Hình ảnh:</label>
+            <input type="text" id="newProductImage" placeholder="Tên file">
+          </div>
+          <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+        </form>
+      </div>
+
+      <div class="products-table-section">
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>Tên Sản Phẩm</th>
+              <th>Hãng</th>
+              <th>Giá (VND)</th>
+              <th>Tồn Kho</th>
+              <th>Mô Tả</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for phone in phones %}
+            <tr data-product-name="{{ phone.name }}">
+              <td>{{ phone.name }}</td>
+              <td>{{ phone.brand }}</td>
+              <td>{{ "{:,}".format(phone.price) }}</td>
+              <td>{{ phone.stock }}</td>
+              <td>{{ phone.description[:50] }}...</td>
+              <td>
+                <button class="btn btn-sm btn-edit" onclick="editProduct('{{ phone.name }}')">Sửa</button>
+                <button class="btn btn-sm btn-delete" onclick="deleteProduct('{{ phone.name }}')">Xóa</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Orders Management Tab -->
+    <div id="orders" class="tab-content">
+      <h2>Danh Sách Đơn Hàng</h2>
+      
+      <div class="orders-table-section">
+        {% if orders %}
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Mã Đơn</th>
+              <th>Khách Hàng</th>
+              <th>Địa Chỉ</th>
+              <th>Điện Thoại</th>
+              <th>Tổng Tiền (VND)</th>
+              <th>Hình Thức TT</th>
+              <th>Ngày Đặt</th>
+              <th>Trạng Thái</th>
+              <th>Chi Tiết</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+            <tr data-order-id="{{ order._id }}">
+              <td>{{ order._id[:8] }}</td>
+              <td>{{ order.fullname }}</td>
+              <td>{{ order.address }}</td>
+              <td>{{ order.phone }}</td>
+              <td>{{ "{:,}".format(order.total) }}</td>
+              <td>{{ order.payment_method }}</td>
+              <td>{{ order.date.strftime('%d/%m/%Y %H:%M') if order.date else 'N/A' }}</td>
+              <td>
+                <select class="status-select" onchange="updateOrderStatus('{{ order._id }}', this.value)">
+                  <option value="pending" {% if order.get('status') == 'pending' %}selected{% endif %}>Chờ xử lý</option>
+                  <option value="confirmed" {% if order.get('status') == 'confirmed' %}selected{% endif %}>Đã xác nhận</option>
+                  <option value="shipped" {% if order.get('status') == 'shipped' %}selected{% endif %}>Đã gửi</option>
+                  <option value="delivered" {% if order.get('status') == 'delivered' %}selected{% endif %}>Đã giao</option>
+                  <option value="cancelled" {% if order.get('status') == 'cancelled' %}selected{% endif %}>Hủy</option>
+                </select>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-info" onclick="showOrderDetails('{{ order._id }}')">Xem</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="no-orders">Không có đơn hàng nào</p>
+        {% endif %}
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Product Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditModal()">&times;</span>
+      <h3>Chỉnh Sửa Sản Phẩm</h3>
+      <form id="editProductForm">
+        <div class="form-group">
+          <label for="editProductName">Tên sản phẩm:</label>
+          <input type="text" id="editProductName" required>
+        </div>
+        <div class="form-group">
+          <label for="editProductBrand">Hãng:</label>
+          <input type="text" id="editProductBrand" required>
+        </div>
+        <div class="form-group">
+          <label for="editProductPrice">Giá (VND):</label>
+          <input type="number" id="editProductPrice" required>
+        </div>
+        <div class="form-group">
+          <label for="editProductStock">Tồn kho:</label>
+          <input type="number" id="editProductStock" required>
+        </div>
+        <div class="form-group">
+          <label for="editProductDesc">Mô tả:</label>
+          <textarea id="editProductDesc" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editProductImage">Hình ảnh:</label>
+          <input type="text" id="editProductImage">
+        </div>
+        <button type="submit" class="btn btn-primary">Cập Nhật Sản Phẩm</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content modal-large">
+      <span class="close" onclick="closeOrderModal()">&times;</span>
+      <h3>Chi Tiết Đơn Hàng</h3>
+      <div id="orderDetailsContent"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentEditProduct = null;
+    let allPhones = {{ phones | tojson }};
+    let allOrders = {{ orders | tojson }};
+
+    function switchTab(tabName) {
+      // Hide all tab contents
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+      
+      // Remove active class from all buttons
+      const buttons = document.querySelectorAll('.tab-button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Add Product
+    document.getElementById('addProductForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const newProduct = {
+        name: document.getElementById('newProductName').value,
+        brand: document.getElementById('newProductBrand').value,
+        price: document.getElementById('newProductPrice').value,
+        stock: document.getElementById('newProductStock').value,
+        description: document.getElementById('newProductDesc').value,
+        image: document.getElementById('newProductImage').value || 'no-image.jpg'
+      };
+
+      fetch('/admin/add_product', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newProduct)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Sản phẩm đã được thêm thành công!');
+          location.reload();
+        } else {
+          alert('Lỗi: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Có lỗi xảy ra!');
+      });
+    });
+
+    // Edit Product
+    function editProduct(productName) {
+      currentEditProduct = productName;
+      const product = allPhones.find(p => p.name === productName);
+      
+      if (product) {
+        document.getElementById('editProductName').value = product.name;
+        document.getElementById('editProductBrand').value = product.brand;
+        document.getElementById('editProductPrice').value = product.price;
+        document.getElementById('editProductStock').value = product.stock;
+        document.getElementById('editProductDesc').value = product.description;
+        document.getElementById('editProductImage').value = product.image;
+        
+        document.getElementById('editModal').style.display = 'block';
+      }
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    document.getElementById('editProductForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const updatedProduct = {
+        name: document.getElementById('editProductName').value,
+        brand: document.getElementById('editProductBrand').value,
+        price: document.getElementById('editProductPrice').value,
+        stock: document.getElementById('editProductStock').value,
+        description: document.getElementById('editProductDesc').value,
+        image: document.getElementById('editProductImage').value
+      };
+
+      fetch(`/admin/edit_product/${encodeURIComponent(currentEditProduct)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedProduct)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Sản phẩm đã được cập nhật!');
+          location.reload();
+        } else {
+          alert('Lỗi: ' + data.message);
+        }
+      });
+    });
+
+    // Delete Product
+    function deleteProduct(productName) {
+      if (confirm(`Bạn chắc chắn muốn xóa sản phẩm "${productName}"?`)) {
+        fetch(`/admin/delete_product/${encodeURIComponent(productName)}`, {
+          method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Sản phẩm đã được xóa!');
+            location.reload();
+          } else {
+            alert('Lỗi: ' + data.message);
+          }
+        });
+      }
+    }
+
+    // Update Order Status
+    function updateOrderStatus(orderId, newStatus) {
+      fetch(`/admin/update_order_status/${orderId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Trạng thái đơn hàng đã được cập nhật!');
+        } else {
+          alert('Lỗi: ' + data.message);
+        }
+      });
+    }
+
+    // Show Order Details
+    function showOrderDetails(orderId) {
+      const order = allOrders.find(o => o._id === orderId);
+      
+      if (order) {
+        let itemsHTML = '<table class="details-table"><thead><tr><th>Sản Phẩm</th><th>Giá (VND)</th><th>Số Lượng</th><th>Tổng (VND)</th></tr></thead><tbody>';
+        
+        order.items.forEach(item => {
+          const itemTotal = item.price * item.quantity;
+          itemsHTML += `<tr>
+            <td>${item.name}</td>
+            <td>${item.price.toLocaleString()}</td>
+            <td>${item.quantity}</td>
+            <td>${itemTotal.toLocaleString()}</td>
+          </tr>`;
+        });
+        
+        itemsHTML += '</tbody></table>';
+        
+        const detailsHTML = `
+          <div class="order-details">
+            <p><strong>Mã Đơn Hàng:</strong> ${order._id}</p>
+            <p><strong>Khách Hàng:</strong> ${order.fullname}</p>
+            <p><strong>Email:</strong> ${order.user}</p>
+            <p><strong>Địa Chỉ:</strong> ${order.address}</p>
+            <p><strong>Điện Thoại:</strong> ${order.phone}</p>
+            <p><strong>Hình Thức Thanh Toán:</strong> ${order.payment_method}</p>
+            <p><strong>Ngày Đặt:</strong> ${new Date(order.date).toLocaleString('vi-VN')}</p>
+            <p><strong>Trạng Thái:</strong> ${order.status || 'pending'}</p>
+            <p><strong>Tổng Tiền:</strong> ${order.total.toLocaleString()} VND</p>
+            <h4>Sản Phẩm:</h4>
+            ${itemsHTML}
+          </div>
+        `;
+        
+        document.getElementById('orderDetailsContent').innerHTML = detailsHTML;
+        document.getElementById('orderModal').style.display = 'block';
+      }
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+      const editModal = document.getElementById('editModal');
+      const orderModal = document.getElementById('orderModal');
+      
+      if (event.target === editModal) {
+        editModal.style.display = 'none';
+      }
+      if (event.target === orderModal) {
+        orderModal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

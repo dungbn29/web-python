@@ -2,18 +2,17 @@
 <html>
 <head>
   <title>{{ phone.name }}</title>
+  <link rel="stylesheet" href="/static/css/index.css">
   <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
   <header class="main-header">
     <a href="/" class="logo">Phone Shop</a>
     <nav>
-      <a href="/recommend">Chọn điện thoại thông minh</a>
       <a href="/cart">Giỏ hàng</a>
       {% if session.get('user') %}
-        <span>Xin chào {{ session['user'] }}</span>
+        <span>Xin chào {{ session.get('user_name', 'User') }}</span>
         <a href="/logout">Đăng xuất</a>
-        <a href="/cart">Giỏ hàng</a>
       {% else %}
         <a href="/login">Đăng nhập</a>
         <a href="/register">Đăng ký</a>
@@ -27,13 +26,18 @@
         <h1>{{ phone.name }}</h1>
         <div class="product-price">{{ phone.price }} VND</div>
         <p class="desc">{{ phone.description }}</p>
-        <p><strong>Thông số kỹ thuật:</strong> {{ phone.specifications }}</p>
+        <p><strong>Thông số kỹ thuật:</strong></p>
+        <ul>
+          {% for key, value in phone.specifications.items() %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+          {% endfor %}
+        </ul>
         <p>Tồn kho: {{ phone.stock }}</p>
         <form method="POST" action="/add_to_cart">
           <input type="hidden" name="name" value="{{ phone.name }}">
           <label>Số lượng:</label>
-          <input type="number" name="quantity" value="1" min="1">
-          <button type="submit">Thêm vào giỏ hàng</button>
+          <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+          <button type="submit" class="add-to-cart-btn">Thêm vào giỏ hàng</button>
         </form>
       </div>
     </div>

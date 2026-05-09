@@ -5,7 +5,8 @@ import sys
 import os
 
 # Add project to path
-sys.path.insert(0, 'D:\\Dung\\code\\phone1')
+#sys.path.insert(0, 'D:\\Dung\\code\\phone1')
+sys.path.insert(0, 'D:\TTCS\web-python')
 
 print("=" * 60)
 print("VALIDATING PROJECT STRUCTURE AND IMPORTS")
@@ -80,21 +81,21 @@ except Exception as e:
 # Test 5: Check collections
 print("\n[5] Checking collections...")
 try:
-    phones = phones_col.find()
+    phones = list(phones_col.find())
     print(f"  ✓ Phones collection: {len(phones)} items")
 except Exception as e:
     print(f"  ✗ Phones collection error: {e}")
     sys.exit(1)
 
 try:
-    users = users_col.find()
+    users = list(users_col.find())
     print(f"  ✓ Users collection: {len(users)} items")
 except Exception as e:
     print(f"  ✗ Users collection error: {e}")
     sys.exit(1)
 
 try:
-    orders = orders_col.find()
+    orders = list(orders_col.find())
     print(f"  ✓ Orders collection: {len(orders)} items")
 except Exception as e:
     print(f"  ✗ Orders collection error: {e}")

@@ -9,8 +9,10 @@ def admin_dashboard():
     if 'user' not in session or session.get('role') != 'admin':
         return redirect('/login')
     
-    phones = list(phones_col.find())
-    orders = orders_col.sort('date', -1)
+    #phones = list(phones_col.find())
+    phones = list(phones_col.find({}, {'_id': 0}))
+    #orders = orders_col.sort('date', -1)
+    orders = list(orders_col.find({}, {'_id': 0}).sort('date', -1))
     
     return render_template('admin.html', phones=phones, orders=orders)
 
